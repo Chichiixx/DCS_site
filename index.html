@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'Top 10 Applications')">Top 10 Applications</button>
+      <button class="tablinks" onclick="openTab(event, 'Évolution des montants')">Évolution des montants</button>
+      <button class="tablinks" onclick="openTab(event, 'Évolution des volumes')">Évolution des volumes</button>
+    </div>
+
+    <div id="Top 10 Applications" class="tabcontent" >
+
+      <h3>Top 10 Applications</h3>
+      <button onclick="afficherGraphique('Chart1.0')">Client 1</button>
+      <button onclick="afficherGraphique('Chart1.1')">Client 2</button>
+      <button onclick="afficherGraphique('Chart1.2')">Client 3</button>
+
+      <canvas id="Chart1.0" class="graph-container"></canvas>
+
+      <script>
+        // Récupérer les données depuis le fichier PHP
+        fetch('../persistance/dialogueBD.php')
+                .then(response => response.json())
+                .then(data => {
+                  // On extrait les labels et les valeurs pour le graphique
+                  const labels = data.map(item => item.nomAppli);  // Les noms des applications
+                  const values = data.map(item => parseFloat(item.TotalFacture));  // Les valeurs des factures (converties en float)
+
+                  // Génération de couleurs dynamiques
+                  const backgroundColors = labels.map((_, index) => getRandomColor(index));
+                  const borderColors = backgroundColors.map(color => color.replace('0.7', '1')); // Bordure plus foncée
+
+                  // Création du graphique
+                  const ctx = document.getElementById('Chart1.0').getContext('2d');
+                  new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                      labels: labels,
+                      datasets: [{
+                        label: 'Total Facture (€)',
+                        data: values,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1
+                      }]
+                    },
+                    options: {
+                      responsive: true,
+                      scales: {
+                        y: {
+                          beginAtZero: true
+                        }
+                      }
+                    }
+                  });
+                })
+                .catch(error => {
+                  console.error('Erreur:', error);
+                });
+
+        // Fonction pour générer une couleur différente par index
+        function getRandomColor(index) {
+          const colors = [
+            'rgba(255, 99, 132, 0.7)',  // Rouge
+            'rgba(54, 162, 235, 0.7)',  // Bleu
+            'rgba(255, 206, 86, 0.7)',  // Jaune
+            'rgba(75, 192, 192, 0.7)',  // Vert
+            'rgba(153, 102, 255, 0.7)', // Violet
+            'rgba(255, 159, 64, 0.7)',  // Orange
+            'rgba(233, 30, 99, 0.7)',   // Rose
+            'rgba(123, 31, 162, 0.7)',  // Indigo
+            'rgba(0, 188, 212, 0.7)',   // Cyan
+            'rgba(255, 87, 34, 0.7)'    // Deep orange
+          ];
+          return colors[index % colors.length];
+        }
+
+      </script>
+
+      <canvas id="Chart1.1" class="graph-container"></canvas>
+      <script>
+        // Récupérer les données depuis le fichier PHP
+        fetch('../persistance/dialogueBD11.php')
+                .then(response => response.json())
+                .then(data => {
+                  // On extrait les labels et les valeurs pour le graphique
+                  const labels = data.map(item => item.nomAppli);  // Les noms des applications
+                  const values = data.map(item => parseFloat(item.TotalFacture));  // Les valeurs des factures (converties en float)
+
+                  // Génération de couleurs dynamiques
+                  const backgroundColors = labels.map((_, index) => getRandomColor(index));
+                  const borderColors = backgroundColors.map(color => color.replace('0.7', '1')); // Bordure plus foncée
+
+                  // Création du graphique
+                  const ctx = document.getElementById('Chart1.1').getContext('2d');
+                  new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                      labels: labels,
+                      datasets: [{
+                        label: 'Total Facture (€)',
+                        data: values,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1
+                      }]
+                    },
+                    options: {
+                      responsive: true,
+                      scales: {
+                        y: {
+                          beginAtZero: true
+                        }
+                      }
+                    }
+                  });
+                })
+                .catch(error => {
+                  console.error('Erreur:', error);
+                });
+
+        // Fonction pour générer une couleur différente par index
+        function getRandomColor(index) {
+          const colors = [
+            'rgba(255, 99, 132, 0.7)',  // Rouge
+            'rgba(54, 162, 235, 0.7)',  // Bleu
+            'rgba(255, 206, 86, 0.7)',  // Jaune
+            'rgba(75, 192, 192, 0.7)',  // Vert
+            'rgba(153, 102, 255, 0.7)', // Violet
+            'rgba(255, 159, 64, 0.7)',  // Orange
+            'rgba(233, 30, 99, 0.7)',   // Rose
+            'rgba(123, 31, 162, 0.7)',  // Indigo
+            'rgba(0, 188, 212, 0.7)',   // Cyan
+            'rgba(255, 87, 34, 0.7)'    // Deep orange
+          ];
+          return colors[index % colors.length];
+        }
+
+      </script>
+
+      <canvas id="Chart1.2" class="graph-container"></canvas>
+      <script>
+        // Récupérer les données depuis le fichier PHP
+        fetch('../persistance/dialogueBD12.php')
+                .then(response => response.json())
+                .then(data => {
+                  // On extrait les labels et les valeurs pour le graphique
+                  const labels = data.map(item => item.nomAppli);  // Les noms des applications
+                  const values = data.map(item => parseFloat(item.TotalFacture));  // Les valeurs des factures (converties en float)
+
+                  // Génération de couleurs dynamiques
+                  const backgroundColors = labels.map((_, index) => getRandomColor(index));
+                  const borderColors = backgroundColors.map(color => color.replace('0.7', '1')); // Bordure plus foncée
+
+                  // Création du graphique
+                  const ctx = document.getElementById('Chart1.2').getContext('2d');
+                  new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                      labels: labels,
+                      datasets: [{
+                        label: 'Total Facture (€)',
+                        data: values,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1
+                      }]
+                    },
+                    options: {
+                      responsive: true,
+                      scales: {
+                        y: {
+                          beginAtZero: true
+                        }
+                      }
+                    }
+                  });
+                })
+                .catch(error => {
+                  console.error('Erreur:', error);
+                });
+
+        // Fonction pour générer une couleur différente par index
+        function getRandomColor(index) {
+          const colors = [
+            'rgba(255, 99, 132, 0.7)',  // Rouge
+            'rgba(54, 162, 235, 0.7)',  // Bleu
+            'rgba(255, 206, 86, 0.7)',  // Jaune
+            'rgba(75, 192, 192, 0.7)',  // Vert
+            'rgba(153, 102, 255, 0.7)', // Violet
+            'rgba(255, 159, 64, 0.7)',  // Orange
+            'rgba(233, 30, 99, 0.7)',   // Rose
+            'rgba(123, 31, 162, 0.7)',  // Indigo
+            'rgba(0, 188, 212, 0.7)',   // Cyan
+            'rgba(255, 87, 34, 0.7)'    // Deep orange
+          ];
+          return colors[index % colors.length];
+        }
+
+      </script>
+    </div>
+
+    <div id="Évolution des montants" class="tabcontent">
+      <h3>Évolution des montants</h3>
+      <canvas id="Chart2" ></canvas>
+
+      <script>
+        // Récupérer les données depuis le fichier PHP
+        fetch('../persistance/dialogueBD2.php')
+                .then(response => response.json())
+                .then(data => {
+                  // Extraction des labels (mois) et des datasets (montant par client)
+                  const moisLabels = [...new Set(data.map(item => item.mois))].sort(); // Tri des mois
+                  const clients = [...new Set(data.map(item => item.NomClient))]; // Liste unique des clients
+
+                  // Création des datasets par client
+                  const datasets = clients.map((client, index) => {
+                    return {
+                      label: client,
+                      data: moisLabels.map(mois => {
+                        const entry = data.find(item => item.NomClient === client && item.mois === mois);
+                        return entry ? parseFloat(entry.montant) : 0; // Valeur trouvée ou 0 si inexistante
+                      }),
+                      backgroundColor: getRandomColor(index),
+                      borderColor: getRandomColor(index),
+                      borderWidth: 3 ,
+                      fill: false
+                    };
+                  });
+
+                  // Création du graphique
+                  const ctx = document.getElementById('Chart2').getContext('2d');
+                  new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                      labels: moisLabels,
+                      datasets: datasets
+                    },
+                    options: {
+                      responsive: true,
+                      plugins: {
+                        legend: { position: 'top' }
+                      },
+                      scales: {
+                        x: { title: { display: true, text: 'Mois' } },
+                        y: { title: { display: true, text: 'Montant (€)' }, beginAtZero: true }
+                      }
+                    }
+                  });
+                })
+                .catch(error => {
+                  console.error('Erreur:', error);
+                });
+
+        // Fonction pour générer des couleurs uniques
+        function getRandomColor(index) {
+          const colors = [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)'
+          ];
+          return colors[index % colors.length];
+        }
+
+      </script>
+
+    </div>
+
+    <div id="Évolution des volumes" class="tabcontent">
+      <h3>Évolution des volumes</h3>
+      <canvas id="Chart3"></canvas>
+
+      <script>
+
+        fetch('../persistance/dialogueBD3.php')
+                .then(response => response.json())
+                .then(data => {
+                  // Extraction des mois et des produits
+                  const moisLabels = [...new Set(data.map(item => item.mois))].sort(); // Tri des mois
+                  const produits = [...new Set(data.map(item => item.NOM_PRODUIT))]; // Liste unique des produits
+
+                  // Création des datasets par produit
+                  const datasets = produits.map((produit, index) => {
+                    return {
+                      label: produit,
+                      data: moisLabels.map(mois => {
+                        const entry = data.find(item => item.NOM_PRODUIT === produit && item.mois === mois);
+                        return entry ? parseFloat(entry['volume']) : 0; // Valeur trouvée ou 0 si inexistante
+                      }),
+                      backgroundColor: getRandomColor(index),
+                      borderColor: getRandomColor(index),
+                      borderWidth: 1
+                    };
+                  });
+
+                  // Création du graphique
+                  const ctx = document.getElementById('Chart3').getContext('2d');
+                  new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                      labels: moisLabels,
+                      datasets: datasets
+                    },
+                    options: {
+                      responsive: true,
+                      plugins: {
+                        legend: { position: 'top' }
+                      },
+                      scales: {
+                        x: { title: { display: true, text: 'Mois' } },
+                        y: { title: { display: true, text: 'Volume' }, beginAtZero: true }
+                      }
+                    }
+                  });
+                })
+                .catch(error => {
+                  console.error('Erreur:', error);
+                });
+
+        // Fonction pour générer des couleurs uniques
+        function getRandomColor(index) {
+          const colors = [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)'
+          ];
+          return colors[index % colors.length];
+        }
+
+
+      </script>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
