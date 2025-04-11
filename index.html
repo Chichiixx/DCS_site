@@ -19,7 +19,7 @@
       <button onclick="afficherGraphique('Chart1.1')">Client 2</button>
       <button onclick="afficherGraphique('Chart1.2')">Client 3</button>
 
-      <canvas id="Chart1.0" class="graph-container"></canvas>
+      <canvas id="Chart1.0" class="graph-container" style="display: none; max-height: 75vh;"></canvas>
 
       <script>
         // Récupérer les données depuis le fichier PHP
@@ -81,7 +81,7 @@
 
       </script>
 
-      <canvas id="Chart1.1" class="graph-container"></canvas>
+      <canvas id="Chart1.1" class="graph-container" style="display: none; max-height: 75vh;"></canvas>
       <script>
         // Récupérer les données depuis le fichier PHP
         fetch('../persistance/dialogueBD11.php')
@@ -142,7 +142,7 @@
 
       </script>
 
-      <canvas id="Chart1.2" class="graph-container"></canvas>
+      <canvas id="Chart1.2" class="graph-container" style="display: none; max-height: 75vh;"></canvas>
       <script>
         // Récupérer les données depuis le fichier PHP
         fetch('../persistance/dialogueBD12.php')
@@ -206,7 +206,7 @@
 
     <div id="Évolution des montants" class="tabcontent">
       <h3>Évolution des montants</h3>
-      <canvas id="Chart2" ></canvas>
+      <canvas id="Chart2" style=" max-height: 75vh;"></canvas>
 
       <script>
         // Récupérer les données depuis le fichier PHP
@@ -274,7 +274,7 @@
 
     <div id="Évolution des volumes" class="tabcontent">
       <h3>Évolution des volumes</h3>
-      <canvas id="Chart3"></canvas>
+      <canvas id="Chart3" style=" max-height: 75vh;"></canvas>
 
       <script>
 
